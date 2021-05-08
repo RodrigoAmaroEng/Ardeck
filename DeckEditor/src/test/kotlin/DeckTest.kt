@@ -1,7 +1,9 @@
 import dev.amaro.editor.models.Deck
 import dev.amaro.editor.models.DeckMask
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import java.lang.IllegalArgumentException
 
 class DeckTest : FunSpec() {
     init {
@@ -26,6 +28,17 @@ class DeckTest : FunSpec() {
         test("Get margin settings for packed mode") {
             val mask = DeckMask.fromDeck(Deck(320, 240, 2, 3), DeckMask.Distribution.Packed)
             mask shouldBe DeckMask(8, 20, 8, 8)
+        }
+
+        test("Deck has slots for the amount of available buttons") {
+            val deck = Deck(320, 240, 2, 3)
+            deck.buttons.size shouldBe 6
+        }
+
+        test("Deck must receive the exact number of buttons") {
+            shouldThrow<IllegalArgumentException> {
+                Deck(320, 240, 2, 3, IntRange(1, 5).map { null })
+            }
         }
     }
 }

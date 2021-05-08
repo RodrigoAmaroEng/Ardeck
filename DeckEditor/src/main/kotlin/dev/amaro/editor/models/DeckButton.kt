@@ -1,6 +1,8 @@
 package dev.amaro.editor.models
 
-interface DeckButton
+interface DeckButton {
+    val name : String
+}
 
-class ActionButton : DeckButton
-class MenuButton: DeckButton
+data class ActionButton(override val name: String) : DeckButton
+data class MenuButton(override val name: String, val menu: DeckMenu) : DeckButton

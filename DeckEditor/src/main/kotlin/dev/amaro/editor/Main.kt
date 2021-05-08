@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerMoveFilter
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.amaro.editor.models.Deck
 import dev.amaro.editor.models.DeckMask
 
@@ -24,13 +25,21 @@ fun main() = Window(title = "Ardeck", size = IntSize(deck.width.toInt(), deck.he
     var count = 0
 
     MaterialTheme {
-        Column(Modifier.padding(mask.horizontalMargin.dp, mask.verticalMargin.dp).width(deck.width.dp).height(deck.height.dp)) {
+        Column(
+            Modifier.padding(mask.horizontalMargin.dp, mask.verticalMargin.dp).width(deck.width.dp)
+                .height(deck.height.dp)
+        ) {
             repeat(deck.rows.toInt()) { row ->
                 Row(Modifier.fillMaxWidth()) {
                     repeat(deck.columns.toInt()) { col ->
                         Column {
                             Button(modifier = Modifier.size(deck.buttonSize.dp), onClick = {}) {
-                                Text("${count++}")
+                                val name = deck.buttons[count]?.name ?: "Press to +"
+                                Column {
+                                    Text("${count++}", modifier = Modifier.align(Alignment.CenterHorizontally))
+                                    Spacer(Modifier.height(4.dp))
+                                    Text(name, fontSize = 10.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
+                                }
                             }
                             if (row < deck.rows - 1) {
                                 Spacer(Modifier.width(0.dp).height(mask.verticalSpace.dp))
@@ -45,8 +54,6 @@ fun main() = Window(title = "Ardeck", size = IntSize(deck.width.toInt(), deck.he
         }
     }
 }
-
-fun intSizeOf(w: Short, h: Short) = IntSize(w.toInt(), h.toInt())
 
 val Short.dp
     get() = this.toInt().dp

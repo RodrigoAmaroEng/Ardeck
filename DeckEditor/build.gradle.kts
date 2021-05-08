@@ -16,9 +16,9 @@ version = "4.5.0"
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    //testImplementation(kotlin("test-junit"))
     testImplementation("io.kotest:kotest-runner-junit5:$version")
     testImplementation("io.kotest:kotest-assertions-core:$version")
+    testImplementation("com.appmattus.fixture:fixture:1.1.0")
 }
 
 compose.desktop {
