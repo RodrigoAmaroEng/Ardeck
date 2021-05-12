@@ -2,9 +2,10 @@ package dev.amaro.editor.models
 
 import java.lang.IllegalArgumentException
 
-class DeckMenu(vararg buttonList: DeckButton) {
+class DeckMenu(val buttons: List<DeckButton>) {
+    constructor(vararg buttonList: DeckButton) : this(buttonList.toList())
+
     init {
-        if (buttonList.size < 2) throw IllegalArgumentException()
+        if (buttons.size < 2) throw IllegalArgumentException()
     }
-    val buttons = buttonList.toList()
 }
