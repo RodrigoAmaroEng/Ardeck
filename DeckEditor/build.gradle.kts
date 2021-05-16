@@ -19,10 +19,11 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation("dev.amaro:sonic:0.2.1")
     implementation ("com.google.code.gson:gson:2.8.6")
+    implementation("io.insert-koin:koin-core:3.0.1")
     testImplementation("io.kotest:kotest-runner-junit5:$version")
     testImplementation("io.kotest:kotest-assertions-core:$version")
     testImplementation("com.appmattus.fixture:fixture:1.1.0")
-    //testImplementation("io.mockk:mockk:1.1.0")
+    testImplementation("io.mockk:mockk:1.11.0")
 }
 
 compose.desktop {

@@ -1,12 +1,12 @@
 package dev.amaro.editor.logic
 
-import dev.amaro.sonic.IAction
-import dev.amaro.sonic.IProcessor
-import dev.amaro.sonic.Processor
-import dev.amaro.sonic.StateManager
+import dev.amaro.sonic.*
 
-class DeckStateManager(initialState: DeckEditorState = DeckEditorState()) :
-    StateManager<DeckEditorState>(initialState) {
+class DeckStateManager(
+    initialState: DeckEditorState = DeckEditorState(),
+    vararg middlewares: IMiddleware<DeckEditorState>
+) :
+    StateManager<DeckEditorState>(initialState, middlewares.asList()) {
     override val processor: IProcessor<DeckEditorState> = object : Processor<DeckEditorState>(this) {
 
         override fun reduce(action: IAction) {
